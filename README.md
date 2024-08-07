@@ -1,11 +1,11 @@
 # Fitness Tribe API
 
-Fitness Tribe AI is an AI-powered fitness app designed for coaches and athletes. The app provides meal analysis by analyzing meal photos and detailed workout recommendations based on athlete profiles.
+Fitness Tribe AI is an AI-powered fitness API designed for coaches and athletes. The API provides meal analysis functionality by analyzing meal photos and an AI powered workout builder, which can generate workout plans based on athlete profiles. Fitness Tribe AI has been built the Gemini model.
 
 ## Features
 
-- **Meal Analysis**: Upload a photo of a meal to receive a detailed analysis of its calorie count and nutrient content.
-- **Workout Recommendations**: Input your profile details to receive a personalized workout plan tailored to your fitness goals.
+- **Meal Analysis**: Upload a photo of a meal to receive a detailed analysis of its ingredients and calorie count.
+- **Workout Builder**: Input an athlete's profile details to receive a personalized workout plan tailored to the athlete's fitness goal.
 
 ## Project Structure
 
