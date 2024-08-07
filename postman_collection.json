@@ -1,0 +1,64 @@
+{
+  "info": {
+    "name": "Fitness Tribe API",
+    "_postman_id": "your-postman-id",
+    "description": "API collection for Fitness Tribe",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Analyze Meal",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "multipart/form-data"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "path/to/your/test_image.jpg"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8000/meals/analyze_meal",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["meals", "analyze_meal"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Recommend Workouts",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"weight\": 70,\n  \"height\": 175,\n  \"age\": 25,\n  \"sex\": \"male\",\n  \"goal\": \"bulking\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/workouts/recommend_workouts",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["workouts", "recommend_workouts"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
