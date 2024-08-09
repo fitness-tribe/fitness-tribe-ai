@@ -6,6 +6,9 @@ repos:
       - id: check-added-large-files
       - id: no-commit-to-branch
         args: [--branch, main]
+        exclude: |
+          ^\.github/workflows/.*$
+        stages: [commit-msg]
   - repo: https://github.com/codespell-project/codespell
     rev: v2.3.0
     hooks:
