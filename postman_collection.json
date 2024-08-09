@@ -47,7 +47,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"weight\": 70,\n  \"height\": 175,\n  \"age\": 25,\n  \"sex\": \"male\",\n  \"goal\": \"bulking\"\n}"
+          "raw": "{\n  \"weight\": 70,\n  \"height\": 175,\n  \"age\": 25,\n  \"sex\": \"male\",\n  \"goal\": \"bulking\",\n  \"workouts_per_week\": 3\n}"
         },
         "url": {
           "raw": "http://localhost:8000/workout-plans/generate",
@@ -71,7 +71,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"weight\": 70,\n  \"height\": 175,\n  \"age\": 25,\n  \"sex\": \"male\",\n  \"goal\": \"bulking\",\n  \"food_intolerance\": [\"gluten\", \"caffeine\"],\n \"dietary_preferences\": [\"vegetarian\", \"high protein\"],\n \"duration_weeks\": 8\n}"
+          "raw": "{\n  \"weight\": 70,\n  \"height\": 175,\n  \"age\": 25,\n  \"sex\": \"male\",\n  \"goal\": \"bulking\",\n  \"food_intolerance\": [\"gluten\", \"caffeine\"],\n  \"dietary_preferences\": [\"vegetarian\", \"high protein\"],\n  \"duration_weeks\": 8\n}"
         },
         "url": {
           "raw": "http://localhost:8000/nutrition-plans/generate",

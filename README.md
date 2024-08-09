@@ -367,7 +367,8 @@ fitness-tribe-ai/
     "height": 175,
     "age": 25,
     "sex": "male",
-    "goal": "bulking"
+    "goal": "bulking",
+    "workouts_per_week": 3
   }
   ```
 

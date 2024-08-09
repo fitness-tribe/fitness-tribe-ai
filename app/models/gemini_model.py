@@ -46,6 +46,7 @@ class GeminiModel:
         prompt = (
             f"Create a workout plan for a {profile_data['age']} year old {profile_data['sex']}, "
             f"weighing {profile_data['weight']}kg and {profile_data['height']}cm tall, with the goal of {profile_data['goal']}. "
+            f"The workout plan should include {profile_data['workouts_per_week']} sessions per week. "
             "The workout plan should focus exclusively on safe, appropriate, and positive exercise recommendations. "
             "Avoid any mention of sensitive or controversial topics. Do not include any content related to sexuality, hate speech, violence, or other harmful themes. "
             "Respond in valid JSON format with no additional explanation or text. "
