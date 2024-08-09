@@ -7,3 +7,4 @@ google-generativeai
 pytest
 httpx
 python-multipart
+pillow

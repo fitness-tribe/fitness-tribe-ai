@@ -20,19 +20,23 @@ fitness-tribe-ai/
 │   ├── routers/
 │   │   ├── __init__.py
 │   │   ├── meals.py
+│   │   ├── nutrition.py
 │   │   ├── workouts.py
 │   ├── schemas/
 │   │   ├── __init__.py
 │   │   ├── meal.py
+│   │   ├── nutrition.py
 │   │   ├── workout.py
 │   ├── services/
 │   │   ├── __init__.py
 │   │   ├── meal_service.py
+│   │   ├── nutrition_service.py
 │   │   ├── workout_service.py
 ├── tests/
 │   ├── __init__.py
-│   ├── test_meals.py
-│   ├── test_workouts.py
+│   ├── test_meal_service.py
+│   ├── test_nutrition_service.py
+│   ├── test_workout_service.py
 ├── .gitignore
 ├── postman_collection.json
 ├── README.md
@@ -85,7 +89,7 @@ fitness-tribe-ai/
 
 ### Meal Analysis
 
-- **Endpoint**: `POST /meals/analyze_meal`
+- **Endpoint**: `POST /meals/analyze`
 - **Description**: Analyze a meal image to provide the food name, total calories, and calories per ingredient.
 - **Request**: `multipart/form-data` with an image file.
 - **Response**: JSON with calories and nutrients.
@@ -103,9 +107,239 @@ fitness-tribe-ai/
   }
   ```
 
-### Workout Recommendations
+### Nutrition Plan generator
 
-- **Endpoint**: `POST /workouts/recommend_workouts`
+- **Endpoint**: `POST /nutrition-plans/generate`
+- **Description**: Generate a personalized nutrition plan based on the athlete's profile and dietary preferences, including food intolerances.
+- **Request**: JSON with profile details.
+
+  ```json
+  {
+    "weight": 70,
+    "height": 175,
+    "age": 25,
+    "sex": "male",
+    "goal": "bulking",
+    "dietary_preferences": ["vegetarian", "high protein"],
+    "food_intolerances": ["Gluten", "Dairy"],
+    "duration_weeks": 4
+  }
+  ```
+
+- **Response**: JSON with a daily calorie intake range, macronutrient distribution, and meal plan options for breakfast, lunch, dinner, and snacks.
+
+  ```json
+  {
+    "daily_calories_range": {
+      "min": 2800,
+      "max": 3200
+    },
+    "macronutrients_range": {
+      "protein": {
+        "min": 140,
+        "max": 170
+      },
+      "carbohydrates": {
+        "min": 300,
+        "max": 350
+      },
+      "fat": {
+        "min": 60,
+        "max": 80
+      }
+    },
+    "meal_plan": {
+      "breakfast": [
+        {
+          "description": "Oatmeal with fruit and nuts",
+          "ingredients": [
+            {
+              "ingredient": "Oatmeal",
+              "quantity": "1 cup",
+              "calories": 150
+            },
+            {
+              "ingredient": "Banana",
+              "quantity": "1/2 cup",
+              "calories": 105
+            },
+            {
+              "ingredient": "Almonds",
+              "quantity": "1/4 cup",
+              "calories": 170
+            }
+          ],
+          "total_calories": 425,
+          "recipe": "Cook oatmeal according to package instructions. Top with sliced banana and almonds."
+        },
+        {
+          "description": "Yogurt with berries and granola",
+          "ingredients": [
+            {
+              "ingredient": "Greek yogurt",
+              "quantity": "1 cup",
+              "calories": 150
+            },
+            {
+              "ingredient": "Blueberries",
+              "quantity": "1/2 cup",
+              "calories": 40
+            },
+            {
+              "ingredient": "Granola",
+              "quantity": "1/4 cup",
+              "calories": 100
+            }
+          ],
+          "total_calories": 290,
+          "recipe": "Combine yogurt, blueberries, and granola in a bowl."
+        }
+      ],
+      "lunch": [
+        {
+          "description": "Salad with grilled chicken and vegetables",
+          "ingredients": [
+            {
+              "ingredient": "Salad greens",
+              "quantity": "1 cup",
+              "calories": 50
+            },
+            {
+              "ingredient": "Grilled chicken breast",
+              "quantity": "4 ounces",
+              "calories": 120
+            },
+            {
+              "ingredient": "Tomatoes",
+              "quantity": "1/2 cup",
+              "calories": 25
+            },
+            {
+              "ingredient": "Avocado",
+              "quantity": "1/2",
+              "calories": 100
+            }
+          ],
+          "total_calories": 295,
+          "recipe": "Combine salad greens, grilled chicken, and tomatoes. Top with sliced avocado."
+        },
+        {
+          "description": "Sandwich on whole-wheat bread",
+          "ingredients": [
+            {
+              "ingredient": "Whole-wheat bread",
+              "quantity": "2 slices",
+              "calories": 150
+            },
+            {
+              "ingredient": "Turkey breast",
+              "quantity": "3 ounces",
+              "calories": 120
+            },
+            {
+              "ingredient": "Lettuce",
+              "quantity": "2 leaves",
+              "calories": 5
+            },
+            {
+              "ingredient": "Tomato",
+              "quantity": "2 slices",
+              "calories": 10
+            }
+          ],
+          "total_calories": 285,
+          "recipe": "Layer turkey, lettuce, and tomato between slices of whole-wheat bread."
+        }
+      ],
+      "dinner": [
+        {
+          "description": "Grilled salmon with quinoa and steamed vegetables",
+          "ingredients": [
+            {
+              "ingredient": "Salmon fillet",
+              "quantity": "6 ounces",
+              "calories": 240
+            },
+            {
+              "ingredient": "Quinoa",
+              "quantity": "1 cup",
+              "calories": 220
+            },
+            {
+              "ingredient": "Broccoli",
+              "quantity": "1 cup",
+              "calories": 55
+            }
+          ],
+          "total_calories": 515,
+          "recipe": "Grill salmon until cooked through. Serve with cooked quinoa and steamed broccoli."
+        },
+        {
+          "description": "Stir-fried tofu with brown rice and vegetables",
+          "ingredients": [
+            {
+              "ingredient": "Tofu",
+              "quantity": "1 cup",
+              "calories": 180
+            },
+            {
+              "ingredient": "Brown rice",
+              "quantity": "1 cup",
+              "calories": 215
+            },
+            {
+              "ingredient": "Mixed vegetables",
+              "quantity": "1 cup",
+              "calories": 80
+            }
+          ],
+          "total_calories": 475,
+          "recipe": "Stir-fry tofu and vegetables in a pan. Serve over brown rice."
+        }
+      ],
+      "snacks": [
+        {
+          "description": "Apple with peanut butter",
+          "ingredients": [
+            {
+              "ingredient": "Apple",
+              "quantity": "1 medium",
+              "calories": 95
+            },
+            {
+              "ingredient": "Peanut butter",
+              "quantity": "2 tablespoons",
+              "calories": 190
+            }
+          ],
+          "total_calories": 285,
+          "recipe": "Slice apple and spread peanut butter on each slice."
+        },
+        {
+          "description": "Trail mix",
+          "ingredients": [
+            {
+              "ingredient": "Mixed nuts",
+              "quantity": "1/4 cup",
+              "calories": 200
+            },
+            {
+              "ingredient": "Dried fruit",
+              "quantity": "1/4 cup",
+              "calories": 120
+            }
+          ],
+          "total_calories": 320,
+          "recipe": "Combine mixed nuts and dried fruit in a small bowl."
+        }
+      ]
+    }
+  }
+  ```
+
+### Workout Plan generator
+
+- **Endpoint**: `POST /workout-plans/generate`
 - **Description**: Generate a workout plan based on the athlete's profile.
 - **Request**: JSON with profile details.
 

@@ -1,7 +1,6 @@
 {
   "info": {
     "name": "Fitness Tribe API",
-    "_postman_id": "your-postman-id",
     "description": "API collection for Fitness Tribe",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -22,22 +21,22 @@
             {
               "key": "file",
               "type": "file",
-              "src": "path/to/your/test_image.jpg"
+              "src": "./tests/test_image.jpg"
             }
           ]
         },
         "url": {
-          "raw": "http://localhost:8000/meals/analyze_meal",
+          "raw": "http://localhost:8000/meals/analyze",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
-          "path": ["meals", "analyze_meal"]
+          "path": ["meals", "analyze"]
         }
       },
       "response": []
     },
     {
-      "name": "Recommend Workouts",
+      "name": "Generate Workout Plan",
       "request": {
         "method": "POST",
         "header": [
@@ -51,11 +50,35 @@
           "raw": "{\n  \"weight\": 70,\n  \"height\": 175,\n  \"age\": 25,\n  \"sex\": \"male\",\n  \"goal\": \"bulking\"\n}"
         },
         "url": {
-          "raw": "http://localhost:8000/workouts/recommend_workouts",
+          "raw": "http://localhost:8000/workout-plans/generate",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
-          "path": ["workouts", "recommend_workouts"]
+          "path": ["workout-plans", "generate"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Generate Nutrition Plan",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"weight\": 70,\n  \"height\": 175,\n  \"age\": 25,\n  \"sex\": \"male\",\n  \"goal\": \"bulking\",\n  \"food_intolerance\": [\"gluten\", \"caffeine\"],\n \"dietary_preferences\": [\"vegetarian\", \"high protein\"],\n \"duration_weeks\": 8\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/nutrition-plans/generate",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["nutrition-plans", "generate"]
         }
       },
       "response": []
