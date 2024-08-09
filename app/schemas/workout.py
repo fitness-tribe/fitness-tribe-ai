@@ -10,13 +10,14 @@ class ProfileData(BaseModel):
     age: int
     sex: str
     goal: str  # bulking, shredding, fat loss, muscle building
+    workouts_per_week: int
 
 
 class Exercise(BaseModel):
     name: str
     sets: int
     reps: str  # could also be 'as many as possible'
-    rest: int
+    rest: int  # rest time in seconds
 
 
 class WarmupCardioCooldown(BaseModel):

@@ -90,7 +90,12 @@ class TestWorkoutService:
 
         # Create a mock profile data
         profile_data = ProfileData(
-            weight=70, height=175, age=25, sex="male", goal="bulking"
+            weight=70,
+            height=175,
+            age=25,
+            sex="male",
+            goal="bulking",
+            workouts_per_week=3,
         ).model_dump()
 
         # Send a POST request to the generate workout plans endpoint
