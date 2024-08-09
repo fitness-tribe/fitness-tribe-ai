@@ -1,13 +1,22 @@
 from app.models.gemini_model import GeminiModel
-from app.schemas.nutrition import ProfileData, NutritionPlan, MealOption, MealPlan, DailyCaloriesRange, MacronutrientRange
+from app.schemas.nutrition import (
+    ProfileData,
+    NutritionPlan,
+    MealOption,
+    MealPlan,
+    DailyCaloriesRange,
+    MacronutrientRange,
+)
 from fastapi import HTTPException
 import json
 import logging
 
+
 def clean_response_text(response_text: str) -> str:
     # Strip unnecessary markdown or whitespace that might have been included
-    clean_text = response_text.strip('```json').strip('```').strip()
+    clean_text = response_text.strip("```json").strip("```").strip()
     return clean_text
+
 
 def generate_nutrition_plan(profile_data: ProfileData) -> NutritionPlan:
     try:
@@ -24,12 +33,17 @@ def generate_nutrition_plan(profile_data: ProfileData) -> NutritionPlan:
             result = json.loads(clean_result_text)
         except json.JSONDecodeError as e:
             logging.error(f"JSON Decode Error (Provide Nutrition Advice): {str(e)}")
-            logging.error(f"Cleaned Result Text (Provide Nutrition Advice) on JSON Decode Error: {clean_result_text}")
+            logging.error(
+                f"Cleaned Result Text (Provide Nutrition Advice) on JSON Decode Error: {clean_result_text}"
+            )
             raise HTTPException(status_code=500, detail=f"JSON Decode Error: {str(e)}")
 
         # Convert the result dictionary to Pydantic models
         daily_calories_range = DailyCaloriesRange(**result["daily_calories_range"])
-        macronutrients_range = {k: MacronutrientRange(**v) for k, v in result["macronutrients_range"].items()}
+        macronutrients_range = {
+            k: MacronutrientRange(**v)
+            for k, v in result["macronutrients_range"].items()
+        }
 
         def parse_meal_options(meal_data):
             return [MealOption(**meal) for meal in meal_data]
@@ -38,13 +52,13 @@ def generate_nutrition_plan(profile_data: ProfileData) -> NutritionPlan:
             breakfast=parse_meal_options(result["meal_plan"]["breakfast"]),
             lunch=parse_meal_options(result["meal_plan"]["lunch"]),
             dinner=parse_meal_options(result["meal_plan"]["dinner"]),
-            snacks=parse_meal_options(result["meal_plan"]["snacks"])
+            snacks=parse_meal_options(result["meal_plan"]["snacks"]),
         )
 
         return NutritionPlan(
             daily_calories_range=daily_calories_range,
             macronutrients_range=macronutrients_range,
-            meal_plan=meal_plan
+            meal_plan=meal_plan,
         )
 
     except Exception as e:

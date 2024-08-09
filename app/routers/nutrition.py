@@ -6,6 +6,7 @@ from app.services.nutrition_service import generate_nutrition_plan
 
 router = APIRouter()
 
+
 @router.post("/generate", response_model=NutritionPlan)
 def get_nutrition_plan(profile_data: ProfileData):
     try:
