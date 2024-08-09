@@ -73,6 +73,24 @@ fitness-tribe-ai/
    GEMINI_API_KEY=your_gemini_api_key
    ```
 
+5. **Install pre-commit hooks**
+
+   This project uses pre-commit hooks to enforce code quality standards, including linting, formatting, and checking for common issues like large files or merge conflicts.
+
+   To install the hooks, run:
+
+   ```bash
+    pre-commit install
+   ```
+
+   This will set up the hooks to run automatically before you make any commits.
+
+   You can manually run these checks on all files at any time with:
+
+   ```bash
+   pre-commit run --all-files
+   ```
+
 ## Usage
 
 1. **Run the FastAPI server**
@@ -434,6 +452,14 @@ pytest
 ## Postman Collection
 
 In case you want to test the API endpoints using postman, feel free to import the `postman_collection.json` as a collection into your postman workspace.
+
+## GitHub Actions CI
+
+This project uses GitHub Actions for continuous integration. On every pull request to the main branch, the following will be checked:
+
+- Code linting and formatting via pre-commit hooks.
+- Python code linting using ruff.
+- Running the test suite via pytest.
 
 ## Contributing
 
