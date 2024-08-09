@@ -5,10 +5,10 @@ from typing import Dict
 
 router = APIRouter()
 
-@router.post("/analyze_meal", response_model=Meal, summary="Analyze Meal", description="Upload a meal image to receive a calorie count and nutrient breakdown.")
+@router.post("/analyze", response_model=Meal, summary="Analyze Meal", description="Upload a meal image to receive a description and calorie count breakdown.")
 async def analyze_meal_endpoint(file: UploadFile = File(...)):
     """
-    Analyze a meal image and get calorie and nutrient information.
+    Analyze a meal image and get a description and calorie count breakdown.
 
     - **file**: Image file of the meal
     """
