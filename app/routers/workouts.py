@@ -4,7 +4,13 @@ from app.schemas.workout import WorkoutPlan, ProfileData
 
 router = APIRouter()
 
-@router.post("/generate", response_model=WorkoutPlan, summary="Generate Workout Plan", description="Input the athlete's profile details to receive a workout plan.")
+
+@router.post(
+    "/generate",
+    response_model=WorkoutPlan,
+    summary="Generate Workout Plan",
+    description="Input the athlete's profile details to receive a workout plan.",
+)
 async def generate_workout_plan_endpoint(profile_data: ProfileData):
     """
     Get a personalized workout plan based on athlete profile.

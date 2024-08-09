@@ -9,6 +9,7 @@ gemini.api_key = os.getenv("GEMINI_API_KEY")
 model_name = "gemini-1.5-flash"
 model = gemini.GenerativeModel(model_name)
 
+
 class GeminiModel:
     @staticmethod
     def analyze_meal(image_data):
@@ -16,8 +17,8 @@ class GeminiModel:
             "Analyze the following meal image and provide the name of the food, "
             "total calorie count, and calories per ingredient. "
             "Respond in the following JSON format: "
-            "{ \"food_name\": \"<food name>\", \"total_calories\": <total calorie count>, "
-            "\"calories_per_ingredient\": {\"<ingredient1>\": <calories>, \"<ingredient2>\": <calories>, ...} }"
+            '{ "food_name": "<food name>", "total_calories": <total calorie count>, '
+            '"calories_per_ingredient": {"<ingredient1>": <calories>, "<ingredient2>": <calories>, ...} }'
         )
 
         try:
@@ -44,42 +45,44 @@ class GeminiModel:
     def generate_workout_plan(profile_data):
         prompt = (
             f"Create a workout plan for a {profile_data['age']} year old {profile_data['sex']}, "
-        f"weighing {profile_data['weight']}kg and {profile_data['height']}cm tall, with the goal of {profile_data['goal']}. "
-        "The workout plan should focus exclusively on safe, appropriate, and positive exercise recommendations. "
-        "Avoid any mention of sensitive or controversial topics. Do not include any content related to sexuality, hate speech, violence, or other harmful themes. "
-        "Respond in valid JSON format with no additional explanation or text. "
-        "The plan should include:\n"
-        "- A warm-up section with a description and duration.\n"
-        "- Cardio recommendations with a description and duration.\n"
-        "- Number of sessions per week.\n"
-        "- Detailed exercises for each session with sets, reps, and rest times.\n"
-        "- A cooldown section with a description and duration.\n\n"
-        "Respond in strict JSON format, ensuring all data is appropriately formatted and focused solely on the workout plan. Ensure that all reps values in the workout_sessions are in double quotes. Here is the format:\n"
-        "{\n"
-        "  \"warmup\": {\"description\": \"<description>\", \"duration\": <duration in minutes>},\n"
-        "  \"cardio\": {\"description\": \"<description>\", \"duration\": <duration in minutes>},\n"
-        "  \"sessions_per_week\": <sessions>,\n"
-        "  \"workout_sessions\": [\n"
-        "    {\n"
-        "      \"exercises\": [\n"
-        "        {\"name\": \"<exercise name>\", \"sets\": <sets>, \"reps\": \"<reps>\", \"rest\": <rest time in seconds>}\n"
-        "      ]\n"
-        "    }\n"
-        "  ],\n"
-        "  \"cooldown\": {\"description\": \"<description>\", \"duration\": <duration in minutes>}\n"
-        "}\n"
+            f"weighing {profile_data['weight']}kg and {profile_data['height']}cm tall, with the goal of {profile_data['goal']}. "
+            "The workout plan should focus exclusively on safe, appropriate, and positive exercise recommendations. "
+            "Avoid any mention of sensitive or controversial topics. Do not include any content related to sexuality, hate speech, violence, or other harmful themes. "
+            "Respond in valid JSON format with no additional explanation or text. "
+            "The plan should include:\n"
+            "- A warm-up section with a description and duration.\n"
+            "- Cardio recommendations with a description and duration.\n"
+            "- Number of sessions per week.\n"
+            "- Detailed exercises for each session with sets, reps, and rest times.\n"
+            "- A cooldown section with a description and duration.\n\n"
+            "Respond in strict JSON format, ensuring all data is appropriately formatted and focused solely on the workout plan. Ensure that all reps values in the workout_sessions are in double quotes. Here is the format:\n"
+            "{\n"
+            "  \"warmup\": {\"description\": \"<description>\", \"duration\": <duration in minutes>},\n"
+            "  \"cardio\": {\"description\": \"<description>\", \"duration\": <duration in minutes>},\n"
+            "  \"sessions_per_week\": <sessions>,\n"
+            "  \"workout_sessions\": [\n"
+            "    {\n"
+            "      \"exercises\": [\n"
+            "        {\"name\": \"<exercise name>\", \"sets\": <sets>, \"reps\": \"<reps>\", \"rest\": <rest time in seconds>}\n"
+            "      ]\n"
+            "    }\n"
+            "  ],\n"
+            "  \"cooldown\": {\"description\": \"<description>\", \"duration\": <duration in minutes>}\n"
+            "}\n"
         )
         try:
             response = model.generate_content(prompt)
 
             # Log the response for debugging purposes
             logging.info(f"Full Gemini API Response: {response}")
-            
+
             output_text = response.text
             return output_text
 
         except Exception as e:
-            logging.error(f"Error communicating with Gemini API or while parsing the response: {str(e)}")
+            logging.error(
+                f"Error communicating with Gemini API or while parsing the response: {str(e)}"
+            )
             return None
 
     @staticmethod
@@ -128,5 +131,7 @@ class GeminiModel:
             return output_text
 
         except Exception as e:
-            logging.error(f"Error communicating with Gemini API or while parsing the response: {str(e)}")
+            logging.error(
+                f"Error communicating with Gemini API or while parsing the response: {str(e)}"
+            )
             return None
